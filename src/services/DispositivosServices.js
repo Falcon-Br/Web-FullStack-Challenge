@@ -33,10 +33,10 @@ module.exports = {
         })
     },
 
-    inserir: (category, color, partNumber)=>{
+    inserir: (dadoFront)=>{        
         return new Promise((aceito,rejeitado)=>{
             db.query('INSERT INTO dispositivos (category, color, partNumber) VALUES (?, ?, ?)',
-                [category, color, partNumber], (error, result)=>{
+                [dadoFront.category, dadoFront.color, dadoFront.partNumber], (error, result)=>{
 
                     if(error){
                         rejeitado(error)
@@ -48,10 +48,10 @@ module.exports = {
     },
 
     
-    alterar: (category, color, partNumber,id)=>{
+    alterar: (dadoFront)=>{
         return new Promise((aceito,rejeitado)=>{
             db.query('UPDATE dispositivos SET category = ?, color = ?, partNumber = ? WHERE id = ?',
-                [category, color, partNumber, id], (error, result)=>{
+                [dadoFront.category, dadoFront.color, dadoFront.partNumber, dadoFront.id], (error, result)=>{
 
                     if(error){
                         rejeitado(error)

@@ -37,9 +37,13 @@ module.exports = {
 
     inserir: async(req, res) =>{
 
-        const category = req.body.category
-        const color = req.body.color
-        const partNumber = req.body.partNumber
+        const {category, color, partNumber} = req.body
+
+        const dadoFront = {
+            category,
+            color,
+            partNumber
+        }
 
         //Verifica se todos os campos foram inserido
         if(!category){
@@ -58,20 +62,24 @@ module.exports = {
         }
 
         try {
-            await DispositivosServices.inserir(category, color, partNumber)
+            await DispositivosServices.inserir(dadoFront)
             res.status(200).json({message: "Dispositivo inserido com sucesso!"})
         } catch (error) {
-            res.status(500).json({error: "Campos não enviados!"})
+            res.status(500).json({error: error})
         }
     },
 
     
     alterar: async(req, res) =>{
 
-        const id = req.params.id
-        const category = req.body.category
-        const color = req.body.color
-        const partNumber = req.body.partNumber
+        const {category, color, partNumber, id} = req.body
+
+        const dadoFront = {
+            category,
+            color,
+            partNumber,
+            id
+        }
 
         //Verifica se todos os campos foram inserido
         if(!id){
@@ -95,7 +103,7 @@ module.exports = {
         }
 
         try {
-            await DispositivosServices.alterar(category, color, partNumber,id)
+            await DispositivosServices.alterar(dadoFront)
             res.status(200).json({message: "Dispositivo inserido com sucesso!"})
         } catch (error) {
             res.status(500).json({error: "Campos não enviados!"})
